@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Додати об'єкт</title>
+    <style>
+        /* Стили для формы */
+        .form-container {
+            width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+        <h2>Додати об'єкт</h2>
+        <form>
+            <h3>Об'єкт</h3>
+            <label><strong><em>Статус об'єкта:</em></strong></label>
+            <select id="objectStatus" name="objectStatus">
+                <option value="Локація">Локація</option>
+                <option value="Проект">Проект</option>
+                <option value="Переговори">Переговори</option>
+                <option value="Розрахунок ТЕО">Розрахунок ТЕО</option>
+                <option value="Доопрацювання після ТЕО">Доопрацювання після ТЕО</option>
+                <option value="Тайм-лист">Тайм-лист</option>
+                <option value="Діючий">Діючий</option>
+                <option value="Відмова">Відмова</option>
+            </select>
+
+            <br>            
+            
+            <label for="objectDogovir"><strong>Договір підписан:</strong></label>
+            <select id="objectDogovir" name="objectDogovir">
+                <option value="Так">Так</option>
+                <option value="Ні">Ні</option>
+            </select>
+
+            <br>
+            
+            <label for="objectVilne"><strong>Приміщення вільне:</strong></label>
+            <select id="objectVilne" name="objectVilne">
+                <option value="Так">Так</option>
+                <option value="Ні">Ні</option>
+            </select>
+
+
+
+            <h3>Загальне</h3>
+            <label for="geolocation">Геомаркетінг:</label>
+            <input type="checkbox" id="geolocation" name="geolocation">
+
+            <label for="region">Регіон:</label>
+            <select id="customRegion" name="customRegion">
+                <option value="Східний">Східний</option>
+                <option value="Західний">Західний</option>
+                <option value="Полтавський">Полтавський</option>
+                <option value="Волинський">Волинський</option>
+                <option value="Подільський">Подільський</option>
+                <option value="Південний">Південний</option>
+                <option value="Київський">Київський</option>
+                <option value="Північний">Північний</option>
+                <option value="Центральний">Центральний</option>
+                <option value="Південно-Східний">Південно-Східний</option>
+            </select>
+            
+            <script>
+                function closeForm() {
+                        window.close();
+                    }
+
+                    function updateCustomRegion() {
+                        const regionSelect = document.getElementById("region");
+                        const customRegionSelect = document.getElementById("customRegion");
+
+                        const selectedOption = regionSelect.options[regionSelect.selectedIndex].value;
+                        if (selectedOption) {
+                            customRegionSelect.value = determineCustomRegion(selectedOption);
+                            customRegionSelect.disabled = false;
+                        } else {
+                            customRegionSelect.disabled = true;
+                        }
+                    }
+
+                function determineCustomRegion(selectedOption) {
+                    switch (selectedOption) {
+                        case "Донецька":
+                        case "Луганська":
+                        case "Харківська":
+                            return "Східний";
+                        case "Закарпатська":
+                        case "Львівська":
+                        case "Івано-Франківська":
+                            return "Західний";
+                        case "Полтавська":
+                        case "Сумська":
+                            return "Полтавський";
+                        case "Волинська":
+                        case "Рівненська":
+                        case "Тернопільська":
+                            return "Волинський";
+                        case "Хмельницька":
+                        case "Чернівецька":
+                        case "Вінницька":
+                            return "Подільський";
+                        case "Миколаївська":
+                        case "Херсонська":
+                        case "Одеська":
+                            return "Південний";
+                        case "м. Київ":
+                            return "Київський";
+                        case "Чернігівська":
+                        case "Суми-СВР":
+                        case "Київ обл-СВР":
+                            return "Північний";
+                        case "Житомирська":
+                        case "Київ обл-Ц":
+                            return "Центральний";
+                        case "Дніпропетровська":
+                        case "Запорізька":
+                        case "Кіровоградська":
+                        case "Черкаська":
+                            return "Південно-Східний";
+                        default:
+                            return "";
+                    }
+                }
+            </script>
+
+            <label for="region">Область:</label>
+            <select id="region" name="region" onchange="updateCustomRegion()">  
+                <option value="Вінницька">Вінницька</option>
+                <option value="Волинська">Волинська</option>
+                <option value="Дніпропетровська">Дніпропетровська</option>
+                <option value="Донецька">Донецька</option>
+                <option value="Житомирська">Житомирська</option>
+                <option value="Закарпатська">Закарпатська</option>
+                <option value="Запорізька">Запорізька</option>
+                <option value="Івано-Франківська">Івано-Франківська</option>
+                <option value="Кіровоградська">Кіровоградська</option>
+                <option value="Луганська">Луганська</option>
+                <option value="Львівська">Львівська</option>
+                <option value="Миколаївська">Миколаївська</option>
+                <option value="Одеська">Одеська</option>
+                <option value="Полтавська">Полтавська</option>
+                <option value="Рівненська">Рівненська</option>
+                <option value="Суми-СВР">Суми-СВР</option>
+                <option value="Суми-ПЛТ">Суми-ПЛТ</option>
+                <option value="Тернопільська">Тернопільська</option>
+                <option value="Харківська">Харківська</option>
+                <option value="Херсонська">Херсонська</option>
+                <option value="Хмельницька">Хмельницька</option>
+                <option value="Черкаська">Черкаська</option>
+                <option value="Чернівецька">Чернівецька</option>
+                <option value="Чернігівська">Чернігівська</option>
+                <option value="м. Київ">м. Київ</option>
+                <option value="Київ обл-СВР">Київ обл-СВР</option>
+                <option value="Київ обл-Ц">Київ обл-Ц</option>
+            </select>
+
+
+            <label for="city">Місто:</label>
+            <select id="city" name="city">
+                <!-- Здесь будут автоматически добавляться варианты міст в залежності від обраної області -->
+            </select>
+
+            <!-- ... добавьте остальные поля для этой секции -->
+
+            <!-- ... добавьте остальные поля для других секций -->
+
+            <button type="submit">Зберегти</button>
+            <button type="button" onclick="closeForm()">Закрити</button>
+        </form>
+    </div>
+
+    <script>
+        function closeForm() {
+            window.close();
+        }
+    </script>
+
+</body>
+
+</html>
